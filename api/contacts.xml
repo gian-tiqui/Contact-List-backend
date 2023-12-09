@@ -5,14 +5,14 @@
     <middle_name>Michael</middle_name>
     <last_name>Doe</last_name>
     <sex>Male</sex>
-    <civil_status>Single</civil_status>
+    <civil_status>Married</civil_status>
     <birthmonth>1</birthmonth>
     <birthday>15</birthday>
     <birthyear>1993</birthyear>
     <address>123 Main Street, Cityville</address>
     <phone_number>555-1234</phone_number>
     <email>john@gmail.com</email>
-    <contact_of>10011</contact_of>
+    <contact_of>10012</contact_of>
   </contact>
 
   <contact id="2">
@@ -42,7 +42,7 @@
     <address>789 Pine Lane, Hilltop</address>
     <phone_number>555-9876</phone_number>
     <email>david@gmail.com</email>
-    <contact_of>10011</contact_of>
+    <contact_of>10012</contact_of>
   </contact>
 
   <contact id="4">
