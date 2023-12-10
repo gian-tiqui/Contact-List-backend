@@ -50,7 +50,7 @@
     <middle_name>Rose</middle_name>
     <last_name>Johnson</last_name>
     <sex>Female</sex>
-    <civil_status>Single</civil_status>
+    <civil_status>Married</civil_status>
     <birthmonth>4</birthmonth>
     <birthday>25</birthday>
     <birthyear>1992</birthyear>
@@ -65,7 +65,7 @@
     <middle_name>James</middle_name>
     <last_name>Anderson</last_name>
     <sex>Male</sex>
-    <civil_status>Divorced</civil_status>
+    <civil_status>Married</civil_status>
     <birthmonth>9</birthmonth>
     <birthday>7</birthday>
     <birthyear>1985</birthyear>
