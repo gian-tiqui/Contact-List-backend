@@ -2,20 +2,39 @@
 header("Access-Control-Allow-Origin: http://www.contactlist.com");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 
-function updateContact($contactId, $updatedContact) {
-    $xmlFile = 'contacts.xml';
+require("connection.php");
 
-    $xml = simplexml_load_file($xmlFile);
+function updateContact($contactId, $updatedContact, $connection) {
+    
+    $ln = $updatedContact['lastName'];
+    $ad = $updatedContact['address'];
+    $cs = $updatedContact['civilStatus'];
+    $pn = $updatedContact['phoneNumber'];
+    $em = $updatedContact['email'];
 
-    $contact = $xml->xpath("/contacts/contact[@id='$contactId']")[0];
+    $query = "UPDATE contacts SET last_name = '$ln', address = '$ad', civil_status = '$cs', phone_number = '$pn', email = '$em' WHERE id = '$contactId'";
 
-    $contact->last_name = $updatedContact['lastName'];
-    $contact->address = $updatedContact['address'];
-    $contact->civil_status = $updatedContact['civilStatus'];
-    $contact->phone_number = $updatedContact['phoneNumber'];
-    $contact->email = $updatedContact['email'];
+    if ($connection->query($query) === TRUE) {
+        $xmlFile = 'contacts.xml';
 
-    $xml->asXML($xmlFile);
+        $xml = simplexml_load_file($xmlFile);
+
+        $contact = $xml->xpath("/contacts/contact[@id='$contactId']")[0];
+
+        $contact->last_name = $ln;
+        $contact->address = $ad;
+        $contact->civil_status = $cs;
+        $contact->phone_number = $pn;
+        $contact->email = $em;
+
+        if ($xml->asXML($xmlFile)) {
+            echo json_encode(['success' => true, 'message' => 'Contact updated successfully']);
+        } else {
+            echo json_encode(['error' => 'Error saving XML file']);
+        }
+    }
+
+    $connection->close();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
@@ -28,13 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         'email' => $_POST['email'],
     ];
 
-    // Update the contact information
-    updateContact($contactId, $updatedContact);
+    updateContact($contactId, $updatedContact, $connection);
 
-    // Send a response (you can customize the response as needed)
-    echo json_encode(['success' => true, 'message' => 'Contact updated successfully']);
 } else {
-    // Invalid request
     http_response_code(400);
     echo json_encode(['error' => 'Invalid request']);
 }
