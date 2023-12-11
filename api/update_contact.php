@@ -27,6 +27,22 @@ function updateContact($contactId, $updatedContact, $connection) {
         $contact->phone_number = $pn;
         $contact->email = $em;
 
+        $jsonFile = 'contacts.json';
+        $json = json_decode(file_get_contents($jsonFile), true);
+
+        foreach ($json['contacts'] as &$jsonContact) {
+            if ($jsonContact['id'] == $contactId) {
+                $jsonContact['last_name'] = $ln;
+                $jsonContact['address'] = $ad;
+                $jsonContact['civil_status'] = $cs;
+                $jsonContact['phone_number'] = $pn;
+                $jsonContact['email'] = $em;
+                break;
+            }
+        }
+
+        file_put_contents($jsonFile, json_encode($json, JSON_PRETTY_PRINT));
+
         if ($xml->asXML($xmlFile)) {
             echo json_encode(['success' => true, 'message' => 'Contact updated successfully']);
         } else {

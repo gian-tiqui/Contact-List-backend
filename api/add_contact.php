@@ -50,6 +50,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newContact->addChild('phone_number', $cPhone);
         $newContact->addChild('email', $cEmail);
         $newContact->addChild('contact_of', $contactOf);
+
+        $jsonFile = 'contacts.json';
+        $json = json_decode(file_get_contents($jsonFile), true);
+        
+        $newContactData = [
+            'id' => $newId,
+            'first_name' => $cFirstName,
+            'middle_name' => $cMiddleName,
+            'last_name' => $cLastName,
+            'sex' => $cSex,
+            'civil_status' => $cCivilStatus,
+            'birthmonth' => $cBirthMonth,
+            'birthday' => $cBirthDay,
+            'birthyear' => $cBirthYear,
+            'address' => $cAddress,
+            'phone_number' => $cPhone,
+            'email' => $cEmail,
+            'contact_of' => $contactOf,
+        ];
+
+        $json['contacts'][] = $newContactData;
+        file_put_contents($jsonFile, json_encode($json));
     }
 
     $xml->asXML('contacts.xml');

@@ -24,6 +24,19 @@ function deleteContact($id, $connection) {
         $dom->parentNode->removeChild($dom);
 
         $xml->asXML('contacts.xml');
+
+        $jsonFile = 'contacts.json';
+        $json = json_decode(file_get_contents($jsonFile), true);
+
+        foreach ($json['contacts'] as $key => $jsonContact) {
+            if ($jsonContact['id'] == $id) {
+                unset($json['contacts'][$key]);
+                break;
+            }
+        }
+
+        file_put_contents($jsonFile, json_encode($json, JSON_PRETTY_PRINT));
+        
         echo json_encode(["message" => "Contact with ID $id deleted successfully"]);
     } else {
         http_response_code(404); 

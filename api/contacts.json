@@ -1,0 +1,19 @@
+{
+    "contacts": [
+        {
+            "id": "1",
+            "first_name": "test",
+            "middle_name": "test",
+            "last_name": "test",
+            "sex": "Male",
+            "civil_status": "Single",
+            "birthmonth": "10",
+            "birthday": "12312",
+            "birthyear": "12132",
+            "address": "123132meow",
+            "phone_number": "12312",
+            "email": "test@gmail.com",
+            "contact_of": "10011"
+        }
+    ]
+}
